@@ -1,0 +1,41 @@
+{% extends "predictor/base.html" %}
+{% block title %}Iris Predictor — Result{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title mb-3">Prediction Result</h3>
+
+        <p class="fs-4">
+          Predicted class:
+          <span class="badge bg-success">{{ prediction }}</span>
+        </p>
+
+        <h5 class="mt-4">Input values</h5>
+        <ul class="list-group mb-4">
+          {% for name, value in inputs.items %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ name }}</span>
+              <strong>{{ value }}</strong>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <h5>Class probabilities</h5>
+        <ul class="list-group mb-4">
+          {% for p in probabilities %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ p.class }}</span>
+              <strong>{{ p.prob }}%</strong>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Try another</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
